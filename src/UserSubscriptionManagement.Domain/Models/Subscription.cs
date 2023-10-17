@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace UserSubscriptionManagement.Infrastructure.DbEntities;
+namespace UserSubscriptionManagement.Domain.Models;
 
 [Table("subscriptions")]
-public class Subscriptions
+public class Subscription
 {
     [Key]
     [Column("id")]

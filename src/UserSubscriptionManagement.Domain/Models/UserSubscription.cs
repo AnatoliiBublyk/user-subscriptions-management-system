@@ -1,11 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using UserSubscriptionManagement.Domain.Models;
 
-namespace UserSubscriptionManagement.Infrastructure.DbEntities;
+namespace UserSubscriptionManagement.Domain.Models;
 
 [Table("user_subscriptions")]
-public class UserSubscriptions
+public class UserSubscription
 {
     [Key]
     [Column("user_id")]
@@ -16,8 +15,4 @@ public class UserSubscriptions
     [Required]
     [Column("start_date")]
     public DateOnly StartDate { get; set; }
-
-    //Navigation
-    public User? User { get; set; }
-    public Subscription? Subscription { get; set; }
 }
