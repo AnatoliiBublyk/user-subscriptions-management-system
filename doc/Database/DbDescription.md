@@ -38,9 +38,9 @@ This database is designed to facilitate the management of user subscriptions and
 
 ## Tools and Technologies
 
-- **Database Management System**: PostgreSQL 16
-  - PostgreSQL is used as the backend database system for this API.
-  - Ensure that you have PostgreSQL 16 or a compatible version installed for proper functionality.
+- **Database Management System**: SQL Server 2022
+  - SQL Server is used as the backend database system for this API.
+  - Ensure that you have SQL Server 2022 or a compatible version installed for proper functionality.
 
 ## Purpose
 
