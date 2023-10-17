@@ -7,12 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.10" />
+    <PackageReference Include="Mapster.Core" Version="1.2.1" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.12" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\UserSubscriptionManagement.Application\UserSubscriptionManagement.Application.csproj" />
+    <ProjectReference Include="..\UserSubscriptionManagement.Contracts\UserSubscriptionManagement.Contracts.csproj" />
+    <ProjectReference Include="..\UserSubscriptionManagement.Infrastructure\UserSubscriptionManagement.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
