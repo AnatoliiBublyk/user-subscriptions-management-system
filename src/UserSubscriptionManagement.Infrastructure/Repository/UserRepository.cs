@@ -45,11 +45,14 @@ namespace UserSubscriptionManagement.Infrastructure.Repository
         }
 
 
-        public async Task DeleteAsync(User user)
+        public async Task<bool> DeleteAsync(int id)
         {
-            var entity = _mapper.Map<Users>(user);
+            var entity = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
+            if (entity is null)
+                return false;
             _context.Users.Remove(entity);
             await _context.SaveChangesAsync();
+            return true;
         }
     }
 }

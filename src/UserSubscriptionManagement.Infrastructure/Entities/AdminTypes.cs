@@ -9,11 +9,12 @@ using Microsoft.EntityFrameworkCore;
 namespace UserSubscriptionManagement.Infrastructure.Entities;
 
 [Table("admin_types")]
-[Index("AdminType", Name = "UQ__admin_ty__922F88DAC1AEED0E", IsUnique = true)]
+[Index("AdminType", Name = "UQ__admin_ty__922F88DA2E6A404F", IsUnique = true)]
 public partial class AdminTypes
 {
     [Key]
     [Column("id")]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
 
     [Required]
