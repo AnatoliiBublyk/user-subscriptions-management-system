@@ -26,40 +26,36 @@ public partial class UserSubscriptionsManagementContext : DbContext
     {
         modelBuilder.Entity<AdminTypes>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__admin_ty__3213E83F90FB8E82");
-
-            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.HasKey(e => e.Id).HasName("PK__admin_ty__3213E83F3A043FD8");
         });
 
         modelBuilder.Entity<Subscriptions>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__subscrip__3213E83F95110DD0");
+            entity.HasKey(e => e.Id).HasName("PK__subscrip__3213E83FF569DDBD");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.Duration).HasDefaultValueSql("((30))");
         });
 
         modelBuilder.Entity<UserSubscriptions>(entity =>
         {
-            entity.HasKey(e => new { e.UserId, e.SubscriptionId }).HasName("PK__user_sub__B1DD90E349DA502C");
+            entity.HasKey(e => new { e.UserId, e.SubscriptionId }).HasName("PK__user_sub__B1DD90E39CBB106B");
 
             entity.HasOne(d => d.Subscription).WithMany(p => p.UserSubscriptions)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__user_subs__subsc__66603565");
+                .HasConstraintName("FK__user_subs__subsc__571DF1D5");
 
             entity.HasOne(d => d.User).WithMany(p => p.UserSubscriptions)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__user_subs__user___656C112C");
+                .HasConstraintName("FK__user_subs__user___5629CD9C");
         });
 
         modelBuilder.Entity<Users>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__users__3213E83F4776E960");
+            entity.HasKey(e => e.Id).HasName("PK__users__3213E83FC6E983F6");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.IsEnabled).HasDefaultValueSql("((1))");
 
-            entity.HasOne(d => d.AdminType).WithMany(p => p.Users).HasConstraintName("FK__users__admin_typ__60A75C0F");
+            entity.HasOne(d => d.AdminType).WithMany(p => p.Users).HasConstraintName("FK__users__admin_typ__5165187F");
         });
 
         OnModelCreatingPartial(modelBuilder);

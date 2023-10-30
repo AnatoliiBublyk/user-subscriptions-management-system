@@ -9,11 +9,12 @@ using Microsoft.EntityFrameworkCore;
 namespace UserSubscriptionManagement.Infrastructure.Entities;
 
 [Table("users")]
-[Index("Username", Name = "UQ__users__F3DBC5720FDE35C6", IsUnique = true)]
+[Index("Username", Name = "UQ__users__F3DBC572358313AE", IsUnique = true)]
 public partial class Users
 {
     [Key]
     [Column("id")]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
 
     [Required]

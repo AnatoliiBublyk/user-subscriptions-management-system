@@ -9,11 +9,12 @@ using Microsoft.EntityFrameworkCore;
 namespace UserSubscriptionManagement.Infrastructure.Entities;
 
 [Table("subscriptions")]
-[Index("Key", Name = "UQ__subscrip__DFD83CAFF0E62315", IsUnique = true)]
+[Index("Key", Name = "UQ__subscrip__DFD83CAFA95BC1A7", IsUnique = true)]
 public partial class Subscriptions
 {
     [Key]
     [Column("id")]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
 
     [Required]

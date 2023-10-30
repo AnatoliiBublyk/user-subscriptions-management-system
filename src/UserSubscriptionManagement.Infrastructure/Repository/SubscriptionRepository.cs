@@ -45,11 +45,14 @@ public class SubscriptionRepository : ISubscriptionRepository
 
     }
 
-    public async Task DeleteAsync(Subscription subscription)
+    public async Task<bool> DeleteAsync(int id)
     {
-        var entity = _mapper.Map<Subscriptions>(subscription);
+        var entity = await _context.Subscriptions.FirstOrDefaultAsync(x => x.Id == id);
+        if (entity is null)
+            return false;
         _context.Subscriptions.Remove(entity);
         await _context.SaveChangesAsync();
+        return true;
     }
 
     public async Task<Subscription> GetByKeyAsync(string key)
