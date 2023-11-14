@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace UserSubscriptionManagement.Infrastructure.Entities;
 
 [Table("subscriptions")]
-[Index("Key", Name = "UQ__subscrip__DFD83CAFA95BC1A7", IsUnique = true)]
+[Index("Key", Name = "UQ__subscrip__DFD83CAF115EFA06", IsUnique = true)]
 public partial class Subscriptions
 {
     [Key]

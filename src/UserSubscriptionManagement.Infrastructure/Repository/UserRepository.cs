@@ -30,9 +30,11 @@ namespace UserSubscriptionManagement.Infrastructure.Repository
             return _mapper.Map<IEnumerable<User>>(result);
         }
 
-        public async Task AddAsync(User user)
+        public async Task AddAsync(User user, UserProfile profile)
         {
            var entity = _mapper.Map<Users>(user);
+           var entityProfile = _mapper.Map<UsersProfile>(profile);
+           entity.Profile = entityProfile;
            await _context.Users.AddAsync(entity);
            await _context.SaveChangesAsync();
         }
@@ -48,9 +50,11 @@ namespace UserSubscriptionManagement.Infrastructure.Repository
         public async Task<bool> DeleteAsync(int id)
         {
             var entity = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
-            if (entity is null)
-                return false;
+            if (entity is null) return false;
+            var profileEntity = await _context.UsersProfile.FirstOrDefaultAsync(x => x.Id == entity.ProfileId);
             _context.Users.Remove(entity);
+            if(profileEntity is not null) 
+                _context.UsersProfile.Remove(profileEntity);
             await _context.SaveChangesAsync();
             return true;
         }

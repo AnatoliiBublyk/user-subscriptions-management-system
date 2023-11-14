@@ -9,13 +9,16 @@ using Microsoft.EntityFrameworkCore;
 namespace UserSubscriptionManagement.Infrastructure.Entities;
 
 [Table("users")]
-[Index("Username", Name = "UQ__users__F3DBC572358313AE", IsUnique = true)]
+[Index("Username", Name = "UQ__users__F3DBC5723E98249D", IsUnique = true)]
 public partial class Users
 {
     [Key]
     [Column("id")]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
+
+    [Column("profile_id")]
+    public int? ProfileId { get; set; }
 
     [Required]
     [Column("username")]
@@ -29,49 +32,8 @@ public partial class Users
     [Unicode(false)]
     public string PasswordHash { get; set; }
 
-    [Required]
-    [Column("email")]
-    [StringLength(255)]
-    [Unicode(false)]
-    public string Email { get; set; }
-
     [Column("admin_type_id")]
     public int? AdminTypeId { get; set; }
-
-    [Required]
-    [Column("first_name")]
-    [StringLength(255)]
-    [Unicode(false)]
-    public string FirstName { get; set; }
-
-    [Required]
-    [Column("last_name")]
-    [StringLength(255)]
-    [Unicode(false)]
-    public string LastName { get; set; }
-
-    [Column("middle_name")]
-    [StringLength(255)]
-    [Unicode(false)]
-    public string MiddleName { get; set; }
-
-    [Required]
-    [Column("address")]
-    [StringLength(255)]
-    [Unicode(false)]
-    public string Address { get; set; }
-
-    [Required]
-    [Column("phone")]
-    [StringLength(255)]
-    [Unicode(false)]
-    public string Phone { get; set; }
-
-    [Required]
-    [Column("zip")]
-    [StringLength(255)]
-    [Unicode(false)]
-    public string Zip { get; set; }
 
     [Column("balance")]
     public double Balance { get; set; }
@@ -83,6 +45,10 @@ public partial class Users
     [ForeignKey("AdminTypeId")]
     [InverseProperty("Users")]
     public virtual AdminTypes AdminType { get; set; }
+
+    [ForeignKey("ProfileId")]
+    [InverseProperty("Users")]
+    public virtual UsersProfile Profile { get; set; }
 
     [InverseProperty("User")]
     public virtual ICollection<UserSubscriptions> UserSubscriptions { get; set; } = new List<UserSubscriptions>();

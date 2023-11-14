@@ -16,19 +16,25 @@ CREATE TABLE subscriptions (
     price integer NOT NULL
 );
 
--- Create the "users" table
-CREATE TABLE "users" (
+-- Create the "users_profile" table
+CREATE TABLE users_profile (
     id INT PRIMARY KEY IDENTITY(1, 1),
-    username varchar(255) NOT NULL UNIQUE,
-    password_hash varchar(255) NOT NULL,
     email varchar(255) NOT NULL,
-    admin_type_id integer REFERENCES admin_types(id),
     first_name varchar(255) NOT NULL,
     last_name varchar(255) NOT NULL,
     middle_name varchar(255),
     address varchar(255) NOT NULL,
     phone varchar(255) NOT NULL,
-    zip varchar(255) NOT NULL,
+    zip varchar(255) NOT NULL
+);
+
+-- Create the "users" table
+CREATE TABLE "users" (
+    id INT PRIMARY KEY IDENTITY(1, 1),
+	profile_id INT REFERENCES users_profile (id),
+    username varchar(255) NOT NULL UNIQUE,
+    password_hash varchar(255) NOT NULL,
+    admin_type_id integer REFERENCES admin_types(id),
 	balance FLOAT NOT NULL DEFAULT 0,
     is_enabled BIT  NOT NULL DEFAULT 1
 );	

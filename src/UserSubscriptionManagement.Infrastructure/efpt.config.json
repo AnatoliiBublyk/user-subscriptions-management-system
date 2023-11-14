@@ -30,8 +30,13 @@
       {
          "Name": "[dbo].[users]",
          "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[users_profile]",
+         "ObjectType": 0
       }
    ],
+   "UiHint": "desktop-5nbjp6g\\sqlexpress.user_subscriptions_management.dbo",
    "UncountableWords": null,
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": false,
