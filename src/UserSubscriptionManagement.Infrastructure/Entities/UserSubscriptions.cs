@@ -14,10 +14,12 @@ public partial class UserSubscriptions
 {
     [Key]
     [Column("user_id")]
+    [DatabaseGenerated(DatabaseGeneratedOption.None)]
     public int UserId { get; set; }
 
     [Key]
     [Column("subscription_id")]
+    [DatabaseGenerated(DatabaseGeneratedOption.None)]
     public int SubscriptionId { get; set; }
 
     [Column("start_date", TypeName = "date")]

@@ -20,13 +20,13 @@ public class SubscriptionRepository : ISubscriptionRepository
 
     public async Task<Subscription> GetByIdAsync(int id)
     {
-        var result = await _context.Subscriptions.FirstOrDefaultAsync(x => x.Id == id);
+        var result = await _context.Subscriptions.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
         return _mapper.Map<Subscription>(result ?? throw new ArgumentNullException($"No subscription with id {id} not found"));
     }
 
     public async Task<IEnumerable<Subscription>> GetAllAsync()
     {
-        var result = await _context.Subscriptions.ToListAsync();
+        var result = await _context.Subscriptions.AsNoTracking().ToListAsync();
         return _mapper.Map<IEnumerable<Subscription>>(result);
     }
 
@@ -57,7 +57,7 @@ public class SubscriptionRepository : ISubscriptionRepository
 
     public async Task<Subscription> GetByKeyAsync(string key)
     {
-        var result = await _context.Subscriptions.FirstOrDefaultAsync(x => x.Key == key);
+        var result = await _context.Subscriptions.AsNoTracking().FirstOrDefaultAsync(x => x.Key == key);
         return _mapper.Map<Subscription>(result ?? throw new ArgumentNullException($"No subscription with key {key} found"));
 
     }

@@ -23,4 +23,6 @@ public class User
 
     [Required]
     public bool IsEnabled { get; set; }
+
+    public UserProfile Profile { get; set; }
 }

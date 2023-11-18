@@ -31,18 +31,18 @@ CREATE TABLE users_profile (
 -- Create the "users" table
 CREATE TABLE "users" (
     id INT PRIMARY KEY IDENTITY(1, 1),
-	profile_id INT REFERENCES users_profile (id),
+	profile_id INT REFERENCES users_profile (id) NOT NULL,
     username varchar(255) NOT NULL UNIQUE,
     password_hash varchar(255) NOT NULL,
-    admin_type_id integer REFERENCES admin_types(id),
+    admin_type_id integer REFERENCES admin_types(id) NOT NULL,
 	balance FLOAT NOT NULL DEFAULT 0,
     is_enabled BIT  NOT NULL DEFAULT 1
 );	
 
 -- Create the "user_subscriptions" table with foreign key references
 CREATE TABLE user_subscriptions (
-    [user_id] INT REFERENCES "users"(id),
-    subscription_id INT REFERENCES subscriptions(id),
+    [user_id] INT REFERENCES "users"(id) NOT NULL,
+    subscription_id INT REFERENCES subscriptions(id) NOT NULL,
     [start_date] DATE NOT NULL,
 	PRIMARY KEY ([user_id], subscription_id)
 );
