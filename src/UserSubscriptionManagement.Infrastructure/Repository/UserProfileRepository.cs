@@ -20,7 +20,7 @@ namespace UserSubscriptionManagement.Infrastructure.Repository
 
         public async Task<UserProfile> GetByIdAsync(int id)
         {
-            var result = await _context.UsersProfile.FirstOrDefaultAsync(x => x.Id == id);   
+            var result = await _context.UsersProfile.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);   
             return _mapper.Map<UserProfile>(result ?? throw new ArgumentNullException($"User profile with id {id} not found"));
         }
 

@@ -5,12 +5,12 @@ namespace UserSubscriptionManagement.Domain.Models;
 
 public class UserSubscription
 {
-    [Key]
-    public int UserId { get; set; }
-
-    [Key]
-    public int SubscriptionId { get; set; }
+    [Required]
+    public User User { get; set; } = null!;
 
     [Required]
-    public DateOnly StartDate { get; set; }
+    public Subscription Subscription { get; set; } = null!;
+
+    [Required]
+    public DateTime StartDate { get; set; }
 }

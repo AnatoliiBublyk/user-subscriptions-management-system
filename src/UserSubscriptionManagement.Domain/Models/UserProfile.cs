@@ -4,6 +4,10 @@ namespace UserSubscriptionManagement.Domain.Models;
 
 public class UserProfile
 {
+    [Key]
+    [Required]
+    public int Id { get; set; }
+
     [MaxLength(255)]
     [EmailAddress]
     [Required]
