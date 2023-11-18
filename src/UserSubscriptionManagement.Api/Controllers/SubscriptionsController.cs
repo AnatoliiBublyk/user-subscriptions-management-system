@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using MapsterMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UserSubscriptionManagement.Application.Repositories;
 using UserSubscriptionManagement.Contracts.Dtos;
@@ -9,6 +10,7 @@ namespace UserSubscriptionManagement.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Consumes("application/json")]
     public class SubscriptionsController : ControllerBase
     {
         private readonly ISubscriptionRepository _subscriptionRepo;
@@ -21,41 +23,47 @@ namespace UserSubscriptionManagement.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<SubscriptionDto>> GetAllSubscriptions()
+        [Produces("application/json")]
+        public async Task<IEnumerable<SubscriptionDto>> GetAllSubscriptionsAsync()
         {
             var result = await _subscriptionRepo.GetAllAsync();
             return _mapper.Map<IEnumerable<SubscriptionDto>>(result);
         }
 
         [HttpGet("{id:int}")]
-        public async Task<SubscriptionDto> GetSubscriptionById([Required] int id)
+        [Produces("application/json")]
+        public async Task<SubscriptionDto> GetSubscriptionByIdAsync([Required] int id)
         {
             var result = await _subscriptionRepo.GetByIdAsync(id);
             return _mapper.Map<SubscriptionDto>(result);
         }
 
         [HttpGet("{key}")]
-        public async Task<SubscriptionDto> GetSubscriptionByKey([Required] string key)
+        [Produces("application/json")]
+        public async Task<SubscriptionDto> GetSubscriptionByKeyAsync([Required] string key)
         {
             var result = await _subscriptionRepo.GetByKeyAsync(key);
             return _mapper.Map<SubscriptionDto>(result);
         }
 
         [HttpPost]
-        public async Task AddSubscription([FromBody] SubscriptionDto subscription)
+        [Authorize(Roles = "admin")]
+        public async Task AddSubscriptionAsync([FromBody] SubscriptionDto subscription)
         {
             var sub = _mapper.Map<Subscription>(subscription);
             await _subscriptionRepo.AddAsync(sub);
         }
 
         [HttpPut("{id}")]
-        public async Task UpdateSubscription([Required] int id, [FromBody] SubscriptionDto subscription)
+        [Authorize(Roles = "admin")]
+        public async Task UpdateSubscriptionAsync([Required] int id, [FromBody] SubscriptionDto subscription)
         {
             var sub = _mapper.Map<Subscription>(subscription);
             await _subscriptionRepo.UpdateAsync(sub);
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")]
         public async Task DeleteSubscription([Required] int id)
         {
             await _subscriptionRepo.DeleteAsync(id);
